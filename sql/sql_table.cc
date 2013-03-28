@@ -3392,6 +3392,9 @@ mysql_prepare_create_table(THD *thd, HA_CREATE_INFO *create_info,
     case Key::FOREIGN_KEY:
       key_number--;				// Skip this key
       continue;
+    case Key::CLUSTERING:
+        key_info->flags = HA_CLUSTERING;
+        break;
     default:
       key_info->flags = HA_NOSAME;
       break;
@@ -5863,6 +5866,8 @@ mysql_prepare_alter_table(THD *thd, TABLE *table,
       }
       else if (key_info->flags & HA_FULLTEXT)
         key_type= Key::FULLTEXT;
+      else if (key_info->flags & HA_CLUSTERING)
+        key_type = Key::CLUSTERING;
       else
         key_type= Key::MULTIPLE;
 
