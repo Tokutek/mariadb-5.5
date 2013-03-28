@@ -772,6 +772,14 @@ static bool create_key_infos(uchar *strpos, uint keys, KEY *keyinfo,
     if (new_frm_ver >= 3)
     {
       keyinfo->flags=	   (uint) uint2korr(strpos) ^ HA_NOSAME;
+
+      // Tokutek change, HA_CLUSTERING in frm means HA_SPATIAL and HA_FULLTEXT set
+      if (keyinfo->flags & HA_SPATIAL && keyinfo->flags & HA_FULLTEXT) {
+        keyinfo->flags |= HA_CLUSTERING;
+        keyinfo->flags &= ~(HA_SPATIAL);
+        keyinfo->flags &= ~(HA_FULLTEXT);
+      }
+
       keyinfo->key_length= (uint) uint2korr(strpos+2);
       keyinfo->key_parts=  (uint) strpos[4];
       keyinfo->algorithm=  (enum ha_key_alg) strpos[5];
