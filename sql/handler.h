@@ -2926,6 +2926,15 @@ public:
   inline int ha_update_tmp_row(const uchar * old_data, uchar * new_data);
 
   friend enum icp_result handler_index_cond_check(void* h_arg);
+  virtual int prepare_index_key_scan_map(const uchar * key, key_part_map keypart_map)
+  {
+    uint key_len= calculate_key_len(table, active_index, key, keypart_map);
+    return  prepare_index_key_scan(key, key_len);
+  }
+  virtual int prepare_index_key_scan( const uchar * key, uint key_len )
+  { return 0; }
+  virtual int prepare_range_scan(const key_range *start_key, const key_range *end_key)
+  { return 0; }
 };
 
 #include "multi_range_read.h"
