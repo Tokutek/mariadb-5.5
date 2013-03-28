@@ -175,6 +175,8 @@
 #define HA_MRR_CANT_SORT       (LL(1) << 40)
 #define HA_RECORD_MUST_BE_CLEAN_ON_WRITE (LL(1) << 41)
 
+#define HA_CAN_WRITE_DURING_OPTIMIZE     (LL(1) << 63)
+
 /*
   Table condition pushdown must be performed regardless of
   'engine_condition_pushdown' setting.
