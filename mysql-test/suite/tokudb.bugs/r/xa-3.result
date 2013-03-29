@@ -9,7 +9,7 @@ INSERT INTO t1 VALUES (1);
 INSERT INTO t2 VALUES (2);
 SET SESSION debug="d,crash_commit_before";
 Warnings:
-Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+Warning	1287	'@@debug' is deprecated and will be removed in a future release. Please use '@@debug_dbug' instead
 COMMIT;
 ERROR HY000: Lost connection to MySQL server during query
 select * from t1;
@@ -27,7 +27,7 @@ INSERT INTO t1 VALUES (1);
 INSERT INTO t2 VALUES (2);
 SET SESSION debug="d,crash_commit_after_prepare";
 Warnings:
-Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+Warning	1287	'@@debug' is deprecated and will be removed in a future release. Please use '@@debug_dbug' instead
 COMMIT;
 ERROR HY000: Lost connection to MySQL server during query
 select * from t1;
@@ -45,7 +45,7 @@ INSERT INTO t1 VALUES (1);
 INSERT INTO t2 VALUES (2);
 SET SESSION debug="d,crash_commit_after";
 Warnings:
-Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+Warning	1287	'@@debug' is deprecated and will be removed in a future release. Please use '@@debug_dbug' instead
 COMMIT;
 ERROR HY000: Lost connection to MySQL server during query
 select * from t1;
