@@ -1481,6 +1481,7 @@ bool setup_copy_fields(THD *thd, TMP_TABLE_PARAM *param,
 void copy_fields(TMP_TABLE_PARAM *param);
 bool copy_funcs(Item **func_ptr, const THD *thd);
 uint find_shortest_key(TABLE *table, const key_map *usable_keys);
+uint find_shortest_clustering_key(TABLE *table, const key_map *usable_keys);
 Field* create_tmp_field_from_field(THD *thd, Field* org_field,
                                    const char *name, TABLE *table,
                                    Item_field *item, uint convert_blob_length);
