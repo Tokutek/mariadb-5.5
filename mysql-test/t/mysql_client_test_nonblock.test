@@ -1,5 +1,7 @@
 # This runs the mysql_client_test using the non-blocking API.
 
+-- source include/not_debug.inc
+
 # The non-blocking API is not supported in the embedded server.
 -- source include/not_embedded.inc
 

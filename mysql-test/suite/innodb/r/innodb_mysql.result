@@ -1907,10 +1907,10 @@ EXPLAIN SELECT c FROM foo WHERE c>2;;
 id	1
 select_type	SIMPLE
 table	foo
-type	ALL
+type	index
 possible_keys	PRIMARY
-key	NULL
-key_len	NULL
+key	PRIMARY
+key_len	3
 ref	NULL
 rows	6
 Extra	Using where

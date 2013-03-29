@@ -1,0 +1,2 @@
+memcache_dirty : #4609 memcache patch from facebook not ported to mysql 5.5
+4472 : #4521 MDL for alter table in 5.5 prohibits this test from having any chance of working
