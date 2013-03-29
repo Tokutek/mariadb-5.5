@@ -269,7 +269,8 @@ private:
   void cleanup_new_partition(uint part_count);
   int prepare_new_partition(TABLE *table, HA_CREATE_INFO *create_info,
                             handler *file, const char *part_name,
-                            partition_element *p_elem);
+                            partition_element *p_elem,
+                            const uchar *frm_data, size_t frm_length);
   /*
     delete_table, rename_table and create uses very similar logic which
     is packed into this routine.
@@ -1193,6 +1194,9 @@ public:
       DBUG_ASSERT(h == m_file[i]->ht);
     return h;
   }
+
+public:
+  int new_alter_table_frm_data(const uchar *frm_data, size_t frm_len);
 };
 
 #endif /* HA_PARTITION_INCLUDED */
