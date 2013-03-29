@@ -834,12 +834,16 @@ The following options may be given as the first argument:
  round-robin fashion
  --tokudb[=name]     Enable or disable TokuDB plugin. Possible values are ON,
  OFF, FORCE (don't start if the plugin fails to load).
+ --tokudb-analyze-time=# 
+ analyze time
  --tokudb-block-size=# 
  fractal tree block size
  --tokudb-cache-size=# 
  TokuDB cache table size
  --tokudb-checkpoint-lock 
  Tokudb Checkpoint Lock
+ --tokudb-checkpoint-on-flush-logs 
+ TokuDB Checkpoint on Flush Logs 
  --tokudb-checkpointing-period=# 
  TokuDB Checkpointing period
  --tokudb-cleaner-iterations=# 
@@ -855,12 +859,17 @@ The following options may be given as the first argument:
  --tokudb-data-dir=name 
  TokuDB Data Directory
  --tokudb-debug=#    TokuDB Debug
+ --tokudb-directio   TokuDB Enable Direct I/O 
  --tokudb-disable-hot-alter 
  if on, hot alter table is disabled
  --tokudb-disable-prefetching 
  if on, prefetching disabled
  --tokudb-disable-slow-alter 
  if on, alter tables that require copy are disabled
+ --tokudb-disable-slow-update 
+ disable slow update
+ --tokudb-disable-slow-upsert 
+ disable slow upsert
  --tokudb-fs-reserve-percent=# 
  TokuDB file system space reserve (percent free required)
  --tokudb-init-flags=# 
@@ -1165,9 +1174,11 @@ time-format %H:%i:%s
 timed-mutexes FALSE
 tmp-table-size 16777216
 tokudb ON
+tokudb-analyze-time 60
 tokudb-block-size 4194304
 tokudb-cache-size 0
 tokudb-checkpoint-lock FALSE
+tokudb-checkpoint-on-flush-logs FALSE
 tokudb-checkpointing-period 60
 tokudb-cleaner-iterations 5
 tokudb-cleaner-period 1
@@ -1175,9 +1186,12 @@ tokudb-commit-sync TRUE
 tokudb-create-index-online TRUE
 tokudb-data-dir (No default value)
 tokudb-debug 0
+tokudb-directio FALSE
 tokudb-disable-hot-alter FALSE
 tokudb-disable-prefetching FALSE
 tokudb-disable-slow-alter FALSE
+tokudb-disable-slow-update FALSE
+tokudb-disable-slow-upsert FALSE
 tokudb-fs-reserve-percent 5
 tokudb-init-flags 11403457
 tokudb-load-save-space FALSE
