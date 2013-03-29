@@ -1,0 +1,137 @@
+drop table if exists foo;
+set session tokudb_disable_hot_alter=ON;
+create table foo (a int)engine=TokuDB;
+insert into foo values (1);
+alter table foo add index first(a);
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="d,add_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo add index second(a);
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,prepare_drop_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo add index second(a), drop index first;
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,final_drop_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo add index second(a), drop index first;
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,add_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo add index second(a), drop index first;
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,final_add_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo add index second(a), drop index first;
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,prepare_drop_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo drop index first;
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,final_drop_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo drop index first;
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+SET SESSION debug="d,final_add_index_fail";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+alter table foo add index second(a);
+ERROR HY000: Got error 1 from storage engine
+show create table foo;
+Table	Create Table
+foo	CREATE TABLE `foo` (
+  `a` int(11) DEFAULT NULL,
+  KEY `first` (`a`),
+  KEY `second` (`a`)
+) ENGINE=TokuDB DEFAULT CHARSET=latin1
+SET SESSION debug="";
+Warnings:
+Warning	1287	The syntax '@@debug' is deprecated and will be removed in MariaDB 5.6. Please use '@@debug_dbug' instead
+explain select a from foo FORCE INDEX (second);
+id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
+1	SIMPLE	foo	index	NULL	second	5	NULL	1	Using index
+select a from foo FORCE INDEX (second);
+a
+1
+explain select a from foo FORCE INDEX (first);
+id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
+1	SIMPLE	foo	index	NULL	first	5	NULL	1	Using index
+select a from foo FORCE INDEX (first);
+a
+1
+drop table foo;
