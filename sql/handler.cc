@@ -3934,6 +3934,7 @@ void handler::update_global_table_stats()
 {
   TABLE_STATS * table_stats;
 
+  if (table == NULL) return;
   status_var_add(table->in_use->status_var.rows_read, rows_read);
   DBUG_ASSERT(rows_tmp_read == 0);
 
@@ -3993,6 +3994,7 @@ end:
 
 void handler::update_global_index_stats()
 {
+  if (table == NULL) return;
   DBUG_ASSERT(table->s);
 
   if (!table->in_use->userstat_running)
@@ -5460,3 +5462,78 @@ fl_create_iterator(enum handler_iterator_type type,
   }
 }
 #endif /*TRANS_LOG_MGM_EXAMPLE_CODE*/
+
+/*
+   Default implementation to support in-place alter table
+   and old online add/drop index API
+*/
+
+enum_alter_inplace_result
+handler::check_if_supported_inplace_alter(TABLE *altered_table,
+                                          Alter_inplace_info *ha_alter_info)
+{
+  DBUG_ENTER("check_if_supported_alter");
+
+  HA_CREATE_INFO *create_info= ha_alter_info->create_info;
+
+  Alter_inplace_info::HA_ALTER_FLAGS inplace_offline_operations=
+    Alter_inplace_info::ALTER_COLUMN_EQUAL_PACK_LENGTH |
+    Alter_inplace_info::ALTER_COLUMN_NAME |
+    Alter_inplace_info::ALTER_COLUMN_DEFAULT |
+    Alter_inplace_info::CHANGE_CREATE_OPTION |
+    Alter_inplace_info::ALTER_RENAME_56;
+
+  /* Is there at least one operation that requires copy algorithm? */
+  if (ha_alter_info->handler_flags & ~inplace_offline_operations)
+    DBUG_RETURN(HA_ALTER_INPLACE_NOT_SUPPORTED);
+
+  /*
+    ALTER TABLE tbl_name CONVERT TO CHARACTER SET .. and
+    ALTER TABLE table_name DEFAULT CHARSET = .. most likely
+    change column charsets and so not supported in-place through
+    old API.
+
+    Changing of PACK_KEYS, MAX_ROWS and ROW_FORMAT options were
+    not supported as in-place operations in old API either.
+  */
+  if (create_info->used_fields & (HA_CREATE_USED_CHARSET |
+                                  HA_CREATE_USED_DEFAULT_CHARSET |
+                                  HA_CREATE_USED_PACK_KEYS |
+                                  HA_CREATE_USED_MAX_ROWS) ||
+      (table->s->row_type != create_info->row_type))
+    DBUG_RETURN(HA_ALTER_INPLACE_NOT_SUPPORTED);
+
+  uint table_changes= (ha_alter_info->handler_flags &
+                       Alter_inplace_info::ALTER_COLUMN_EQUAL_PACK_LENGTH) ?
+    IS_EQUAL_PACK_LENGTH : IS_EQUAL_YES;
+  if (table->file->check_if_incompatible_data(create_info, table_changes)
+      == COMPATIBLE_DATA_YES)
+    DBUG_RETURN(HA_ALTER_INPLACE_EXCLUSIVE_LOCK);
+
+  DBUG_RETURN(HA_ALTER_INPLACE_NOT_SUPPORTED);
+}
+
+/*
+   Default implementation to support in-place alter table
+   and old online add/drop index API
+*/
+void handler::notify_table_changed()
+{
+  ha_create_handler_files(table->s->path.str, NULL, CHF_INDEX_FLAG, NULL);
+}
+
+bool handler::ha_prepare_inplace_alter_table(TABLE *altered_table,
+                                             Alter_inplace_info *ha_alter_info)
+{
+  mark_trx_read_write();
+
+  return prepare_inplace_alter_table(altered_table, ha_alter_info);
+}
+
+bool handler::ha_commit_inplace_alter_table(TABLE *altered_table,
+                                            Alter_inplace_info *ha_alter_info,
+                                            bool commit) 
+{
+  return commit_inplace_alter_table(altered_table, ha_alter_info, commit);
+} 
+
