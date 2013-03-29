@@ -2972,6 +2972,8 @@ public:
   inline int ha_update_tmp_row(const uchar * old_data, uchar * new_data);
 
   friend enum icp_result handler_index_cond_check(void* h_arg);
+  virtual int new_alter_table_frm_data(const uchar *frm_data, size_t frm_len)
+  { return 0; }
 };
 
 #include "multi_range_read.h"
