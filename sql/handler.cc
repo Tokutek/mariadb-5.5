@@ -88,6 +88,8 @@ static const LEX_STRING sys_table_aliases[]=
 const char *ha_row_type[] = {
   "", "FIXED", "DYNAMIC", "COMPRESSED", "REDUNDANT", "COMPACT",
   "PAGE",
+  "TOKUDB_UNCOMPRESSED", "TOKUDB_ZLIB", "TOKUDB_QUICKLZ", "TOKUDB_LZMA",
+  "TOKUDB_FAST", "TOKUDB_SMALL",
   "?","?","?"
 };
 
