@@ -11,3 +11,7 @@
 ##############################################################################
 partition_value_myisam : CAST() in partitioning function is currently not supported
 partition_value_innodb : CAST() in partitioning function is currently not supported
+
+partition_mgm_lc0_tokudb     : trac #4721   2012-04-12 tcallaghan  need to change auto_increment behavior for this test to pass
+partition_auto_increment_tokudb     : trac #4721   2012-04-12 tcallaghan  need to change auto_increment behavior for this test to pass
+partition_debug_tokudb : #5479 disabled until fixed in 5.6
