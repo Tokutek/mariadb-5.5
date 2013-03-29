@@ -10,6 +10,9 @@ TABLE_CONSTRAINTS
 TABLE_PRIVILEGES
 TABLE_STATISTICS
 TRIGGERS
+TokuDB_user_data
+TokuDB_user_data_exact
+TokuDB_file_map
 create database `inf%`;
 create database mbase;
 use `inf%`;
