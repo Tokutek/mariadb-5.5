@@ -12,3 +12,5 @@
 
 innodb_flush_checkpoint_debug_basic: removed from XtraDB-26.0
 
+all_vars : #4616 disabled since tokudb does not yet have any tests for its variables
+plugin_dir_basic : #5188 disabled as we expect correct plugin directory
