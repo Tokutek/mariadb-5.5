@@ -19402,6 +19402,8 @@ test_if_skip_sort_order(JOIN_TAB *tab,ORDER *order,ha_rows select_limit,
         ((select_limit >= table_records) &&
          (tab->type == JT_ALL &&
          tab->join->table_count > tab->join->const_tables + 1) &&
+         ((unsigned) best_key != table->s->primary_key ||
+          !table->file->primary_key_is_clustered()) &&
          !(table->file->index_flags(best_key, 0, 1) & HA_CLUSTERED_INDEX)))
       goto use_filesort;
 
