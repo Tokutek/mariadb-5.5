@@ -55,6 +55,9 @@ TABLE_CONSTRAINTS
 TABLE_PRIVILEGES
 TABLE_STATISTICS
 TRIGGERS
+TokuDB_file_map
+TokuDB_user_data
+TokuDB_user_data_exact
 USER_PRIVILEGES
 USER_STATISTICS
 VIEWS
@@ -127,6 +130,9 @@ TABLESPACES	TABLESPACE_NAME
 TABLE_CONSTRAINTS	CONSTRAINT_SCHEMA
 TABLE_PRIVILEGES	TABLE_SCHEMA
 TABLE_STATISTICS	TABLE_SCHEMA
+TokuDB_file_map	dictionary_name
+TokuDB_user_data	database_name
+TokuDB_user_data_exact	database_name
 TRIGGERS	TRIGGER_SCHEMA
 USER_PRIVILEGES	GRANTEE
 USER_STATISTICS	USER
@@ -200,6 +206,9 @@ TABLESPACES	TABLESPACE_NAME
 TABLE_CONSTRAINTS	CONSTRAINT_SCHEMA
 TABLE_PRIVILEGES	TABLE_SCHEMA
 TABLE_STATISTICS	TABLE_SCHEMA
+TokuDB_file_map	dictionary_name
+TokuDB_user_data	database_name
+TokuDB_user_data_exact	database_name
 TRIGGERS	TRIGGER_SCHEMA
 USER_PRIVILEGES	GRANTEE
 USER_STATISTICS	USER
@@ -279,6 +288,9 @@ TABLESPACES	information_schema.TABLESPACES	1
 TABLE_CONSTRAINTS	information_schema.TABLE_CONSTRAINTS	1
 TABLE_PRIVILEGES	information_schema.TABLE_PRIVILEGES	1
 TABLE_STATISTICS	information_schema.TABLE_STATISTICS	1
+TokuDB_file_map	information_schema.TokuDB_file_map	1
+TokuDB_user_data	information_schema.TokuDB_user_data	1
+TokuDB_user_data_exact	information_schema.TokuDB_user_data_exact	1
 TRIGGERS	information_schema.TRIGGERS	1
 USER_PRIVILEGES	information_schema.USER_PRIVILEGES	1
 USER_STATISTICS	information_schema.USER_STATISTICS	1
@@ -342,6 +354,9 @@ Database: information_schema
 | TABLE_PRIVILEGES                      |
 | TABLE_STATISTICS                      |
 | TRIGGERS                              |
+| TokuDB_file_map                       |
+| TokuDB_user_data                      |
+| TokuDB_user_data_exact                |
 | USER_PRIVILEGES                       |
 | USER_STATISTICS                       |
 | VIEWS                                 |
@@ -405,6 +420,9 @@ Database: INFORMATION_SCHEMA
 | TABLE_PRIVILEGES                      |
 | TABLE_STATISTICS                      |
 | TRIGGERS                              |
+| TokuDB_file_map                       |
+| TokuDB_user_data                      |
+| TokuDB_user_data_exact                |
 | USER_PRIVILEGES                       |
 | USER_STATISTICS                       |
 | VIEWS                                 |
@@ -417,5 +435,5 @@ Wildcard: inf_rmation_schema
 | information_schema |
 SELECT table_schema, count(*) FROM information_schema.TABLES WHERE table_schema IN ('mysql', 'INFORMATION_SCHEMA', 'test', 'mysqltest') AND table_name<>'ndb_binlog_index' AND table_name<>'ndb_apply_status' GROUP BY TABLE_SCHEMA;
 table_schema	count(*)
-information_schema	58
+information_schema	60
 mysql	23

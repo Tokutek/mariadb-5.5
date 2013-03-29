@@ -16,3 +16,6 @@ read_many_rows_innodb    : Bug#11748886 2010-11-15 mattiasj report already exist
 archive-big              : Bug#11817185 2011-03-10 Anitha Disabled since this leads to timeout on Solaris Sparc
 log_tables-big           : Bug#11756699 2010-11-15 mattiasj report already exists
 mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 changes - eventum#41836
+default_storage_engine   : tcallaghan   2012-07-10 test is not compatible with our default storage engine changes
+mysql_plugin             : tcallaghan   2012-07-11 need to revisit test
+handlersocket            : prohaska     2012-09-13 needs libstdc++.so.6.0.17 that gets built with gcc-4.7
