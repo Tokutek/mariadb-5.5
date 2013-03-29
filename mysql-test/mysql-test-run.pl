@@ -3495,11 +3495,12 @@ sub mysql_install_db {
   mtr_add_arg($args, "--bootstrap");
   mtr_add_arg($args, "--basedir=%s", $install_basedir);
   mtr_add_arg($args, "--datadir=%s", $install_datadir);
-  mtr_add_arg($args, "--default-storage-engine=myisam");
+  # mtr_add_arg($args, "--default-storage-engine=myisam");
   mtr_add_arg($args, "--skip-$_") for @optional_plugins;
   mtr_add_arg($args, "--disable-sync-frm");
   mtr_add_arg($args, "--tmpdir=%s", "$opt_vardir/tmp/");
   mtr_add_arg($args, "--core-file");
+  mtr_add_arg($args, "--plugin-load=tokudb=ha_tokudb.so");
 
   if ( $opt_debug )
   {
