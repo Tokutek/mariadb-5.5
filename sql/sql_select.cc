@@ -5459,7 +5459,7 @@ best_access_path(JOIN      *join,
             /* Limit the number of matched rows */
             tmp= records;
             set_if_smaller(tmp, (double) thd->variables.max_seeks_for_key);
-            if (table->covering_keys.is_set(key))
+            if (table->covering_keys.is_set(key) || test(table->file->index_flags(key, 0, 0) & HA_CLUSTERED_INDEX))
               tmp= table->file->keyread_time(key, 1, (ha_rows) tmp);
             else
               tmp= table->file->read_time(key, 1,
@@ -5624,7 +5624,7 @@ best_access_path(JOIN      *join,
 
             /* Limit the number of matched rows */
             set_if_smaller(tmp, (double) thd->variables.max_seeks_for_key);
-            if (table->covering_keys.is_set(key))
+            if (table->covering_keys.is_set(key) || test(table->file->index_flags(key, 0, 0) & HA_CLUSTERED_INDEX))
               tmp= table->file->keyread_time(key, 1, (ha_rows) tmp);
             else
               tmp= table->file->read_time(key, 1,
@@ -10143,6 +10143,16 @@ make_join_readinfo(JOIN *join, ulonglong options, uint no_jbuf_after)
             /* Read with index_first / index_next */
 	    tab->type= tab->type == JT_ALL ? JT_NEXT : JT_HASH_NEXT;		
 	  }
+          else if (!(tab->select && tab->select->quick))
+          {
+            uint index= find_shortest_clustering_key(table, &tab->keys);
+            if (index != MAX_KEY)
+            {
+              tab->index= index;
+              tab->read_first_record= join_read_first;
+              tab->type= tab->type == JT_ALL ? JT_NEXT : JT_HASH_NEXT;
+            }
+          }
 	}
         if (tab->select && tab->select->quick &&
             tab->select->quick->index != MAX_KEY && ! tab->table->key_read)
@@ -18423,6 +18433,23 @@ uint find_shortest_key(TABLE *table, const key_map *usable_keys)
         {
           min_cost= cost;
           best=nr;
+        }
+      }
+    }
+  }
+  return best;
+}
+
+uint find_shortest_clustering_key(TABLE *table, const key_map *usable_keys)
+{
+  uint best= MAX_KEY;
+  if (!usable_keys->is_clear_all()) {
+    uint min_length= (uint) ~0;
+    for (uint nr=0; nr < table->s->keys ; nr++) {
+      if (usable_keys->is_set(nr) && test(table->file->index_flags(nr, 0, 0) & HA_CLUSTERED_INDEX)) {
+        if (best == MAX_KEY || table->key_info[nr].key_length < min_length) {
+          min_length= table->key_info[nr].key_length;
+          best= nr;
         }
       }
     }
