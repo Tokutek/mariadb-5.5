@@ -148,6 +148,7 @@ test
 Phase 3/3: Running 'mysql_fix_privilege_tables'...
 OK
 set GLOBAL sql_mode=default;
+set GLOBAL sql_mode='';
 #
 # Bug #41569 mysql_upgrade (ver 5.1) add 3 fields to mysql.proc table 
 # but does not set values.

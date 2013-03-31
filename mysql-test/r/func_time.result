@@ -1924,3 +1924,4 @@ microsecond('12:00:00.123456')	microsecond('2009-12-31 23:59:59.000010')
 123456	10
 select now(258);
 ERROR 42000: Too big precision 258 specified for 'now'. Maximum is 6.
+SET GLOBAL SQL_MODE='';

@@ -1174,3 +1174,4 @@ select microsecond('12:00:00.123456'), microsecond('2009-12-31 23:59:59.000010')
 
 --error ER_TOO_BIG_PRECISION
 select now(258);
+SET GLOBAL SQL_MODE='';
