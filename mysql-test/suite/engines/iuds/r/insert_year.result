@@ -3127,8 +3127,6 @@ INSERT IGNORE INTO t1(c1,c2) VALUES(01,'99');
 Warnings:
 Warning	1062	Duplicate entry '2001' for key 'PRIMARY'
 INSERT IGNORE INTO t2(c1,c2) VALUES('1999','1999');
-Warnings:
-Warning	1062	Duplicate entry '1999-1999' for key 'PRIMARY'
 INSERT IGNORE INTO t1(c1,c2) VALUES('2098','69');
 Warnings:
 Warning	1062	Duplicate entry '2069' for key 'c2'
@@ -6092,8 +6090,6 @@ INSERT IGNORE INTO t1(c1,c2) VALUES(01,'99');
 Warnings:
 Warning	1062	Duplicate entry '01' for key 'PRIMARY'
 INSERT IGNORE INTO t2(c1,c2) VALUES('1999','1999');
-Warnings:
-Warning	1062	Duplicate entry '99-99' for key 'PRIMARY'
 INSERT IGNORE INTO t1(c1,c2) VALUES('2098','69');
 Warnings:
 Warning	1062	Duplicate entry '69' for key 'c2'
