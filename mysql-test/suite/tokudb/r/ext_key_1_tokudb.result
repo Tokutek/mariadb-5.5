@@ -41,7 +41,7 @@ Handler_read_rnd_deleted	0
 Handler_read_rnd_next	0
 explain select x,id from t force index (x) where x=0 and id=1;
 id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
-1	SIMPLE	NULL	NULL	NULL	NULL	NULL	NULL	NULL	Impossible WHERE noticed after reading const tables
+1	SIMPLE	t	const	x	x	8	const,const	1	Using index
 flush status;
 select x,id from t force index (x) where x=0 and id=1;
 x	id
@@ -57,7 +57,7 @@ Handler_read_rnd_deleted	0
 Handler_read_rnd_next	0
 explain select y,id from t force index (x)where x=0 and id=1;
 id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
-1	SIMPLE	NULL	NULL	NULL	NULL	NULL	NULL	NULL	Impossible WHERE noticed after reading const tables
+1	SIMPLE	t	const	x	x	8	const,const	1	
 flush status;
 select y,id from t force index(x) where x=0 and id=1;
 y	id
@@ -90,7 +90,7 @@ Handler_read_rnd_deleted	0
 Handler_read_rnd_next	0
 explain select x,id from t force index (x) where x=2 and id=0;
 id	select_type	table	type	possible_keys	key	key_len	ref	rows	Extra
-1	SIMPLE	NULL	NULL	NULL	NULL	NULL	NULL	NULL	Impossible WHERE noticed after reading const tables
+1	SIMPLE	t	const	x	x	8	const,const	1	Using index
 flush status;
 select x,id from t force index (x) where x=2 and id=0;
 x	id
