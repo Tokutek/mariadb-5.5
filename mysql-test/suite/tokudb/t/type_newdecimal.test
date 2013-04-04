@@ -1,3 +1,5 @@
+--source include/not_mac.inc
+
 set default_storage_engine='TokuDB';
 --disable_warnings
 drop table if exists t1;
