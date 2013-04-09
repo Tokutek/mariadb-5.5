@@ -91,6 +91,8 @@ const char *ha_row_type[] = {
   "?","?","?"
 };
 
+enum legacy_db_type other_ext_key_type;
+
 const char *tx_isolation_names[] =
 { "READ-UNCOMMITTED", "READ-COMMITTED", "REPEATABLE-READ", "SERIALIZABLE",
   NullS};
@@ -415,6 +417,9 @@ int ha_finalize_handlerton(st_plugin_int *plugin)
   if (hton->panic)
     hton->panic(hton, HA_PANIC_CLOSE);
 
+  if (other_ext_key_type == hton->db_type)
+    other_ext_key_type = DB_TYPE_UNKNOWN;
+
   if (plugin->plugin->deinit)
   {
     /*
@@ -537,6 +542,8 @@ int ha_initialize_handlerton(st_plugin_int *plugin)
       hton2plugin[hton->slot]=plugin;
       if (hton->prepare)
         total_ha_2pc++;
+      if (other_ext_key_type == DB_TYPE_UNKNOWN && hton->other_db_type == DB_TYPE_TOKUDB)
+        other_ext_key_type = hton->db_type;
       break;
     }
     /* fall through */

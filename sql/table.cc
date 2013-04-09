@@ -876,7 +876,9 @@ static int open_binary_frm(THD *thd, TABLE_SHARE *share, uchar *head,
     properties of this engine.
   */   
   /* Currently only InnoDB and TokuDB can use extended keys */
-  share->set_use_ext_keys_flag(legacy_db_type == DB_TYPE_INNODB || legacy_db_type == DB_TYPE_TOKUDB);
+  extern enum legacy_db_type other_ext_key_type;
+  share->set_use_ext_keys_flag(legacy_db_type == DB_TYPE_INNODB || legacy_db_type == DB_TYPE_TOKUDB || 
+                               legacy_db_type == other_ext_key_type);
 
   len= (uint) uint2korr(disk_buff+4);
   if (!keys)
