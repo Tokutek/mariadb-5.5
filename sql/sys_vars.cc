@@ -56,6 +56,8 @@
 #endif /* WITH_PERFSCHEMA_STORAGE_ENGINE */
 #include "threadpool.h"
 
+#include "sql_backup.h"
+
 /*
   The rule for this file: everything should be 'static'. When a sys_var
   variable or a function from this file is - in very rare cases - needed
@@ -3903,3 +3905,16 @@ static Sys_var_mybool Sys_pseudo_slave_mode(
        SESSION_ONLY(pseudo_slave_mode), NO_CMD_LINE, DEFAULT(FALSE),
        NO_MUTEX_GUARD, NOT_IN_BINLOG, ON_CHECK(check_pseudo_slave_mode));
 
+static bool update_backup_throttle(sys_var *self, THD *thd, enum_var_type type)
+{
+    sql_backup_throttle(backup_throttle);
+    return false;
+}
+
+static Sys_var_ulong Sys_tokudb_backup_throttle(
+       "tokudb_backup_throttle",
+       "The rate (bytes per second) that the backup is allowed to read data out of the mysql data directory",
+       GLOBAL_VAR(backup_throttle), CMD_LINE(REQUIRED_ARG),
+       VALID_RANGE(0, ULONG_MAX), DEFAULT(ULONG_MAX), BLOCK_SIZE(1),
+       NO_MUTEX_GUARD, NOT_IN_BINLOG, ON_CHECK(0),
+       ON_UPDATE(update_backup_throttle));
