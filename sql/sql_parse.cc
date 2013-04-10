@@ -96,6 +96,9 @@
 #include "set_var.h"
 #include "log_slow.h"
 
+#include "sql_backup.h"
+
+
 #define FLAGSTR(V,F) ((V)&(F)?#F" ":"")
 
 #ifdef WITH_ARIA_STORAGE_ENGINE
@@ -410,6 +413,7 @@ void init_update_queries(void)
   sql_command_flags[SQLCOM_CREATE_SERVER]=      CF_AUTO_COMMIT_TRANS;
   sql_command_flags[SQLCOM_ALTER_SERVER]=       CF_AUTO_COMMIT_TRANS;
   sql_command_flags[SQLCOM_DROP_SERVER]=        CF_AUTO_COMMIT_TRANS;
+  sql_command_flags[SQLCOM_BACKUP]=             CF_AUTO_COMMIT_TRANS;
 }
 
 bool sqlcom_can_generate_row_events(const THD *thd)
@@ -1919,7 +1923,6 @@ err:
   thd->mdl_context.release_transactional_locks();
   return TRUE;
 }
-
 
 /**
   Execute command saved in thd and lex->sql_command.
@@ -3748,6 +3751,17 @@ end_with_restore_list:
     } 
     
     break;
+  }
+  case SQLCOM_BACKUP:
+  {
+      if (check_global_access(thd, SUPER_ACL))
+          goto error;
+      fprintf(stderr, "Check table access worked\n");
+      int r = sql_backups(mysql_real_data_home, lex->backup_dir, thd);
+      res = (r!=0); // FALSE means everything A-OK.  r==0 if everything is OK.
+      if (!res)
+          my_ok(thd);  // Do I call this or not?
+      break;
   }
   case SQLCOM_KILL:
   {
