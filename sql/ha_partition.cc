@@ -8516,9 +8516,11 @@ int ha_partition::discover(THD *thd, const char *db, const char *name, uchar **f
   int error;
   char path[FN_REFLEN];
   uint path_length= build_table_filename(path, sizeof(path) - 1, db, name, "", 0);
+  if (path_length == 0)
+    return EINVAL;
   assert(path_length > 0);
   if (read_par_file(path))
-      return EINVAL;
+    return EINVAL;
 
   Dynamic_array<handlerton *> engines;
 
