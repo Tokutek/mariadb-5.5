@@ -329,6 +329,8 @@ ELSE()
     mysqldumpslow
     mysqld_multi
     mysqld_safe
+    tokustat.py
+    tokufilecheck.py
   )
   FOREACH(file ${BIN_SCRIPTS})
     IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${file}.sh)
