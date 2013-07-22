@@ -3176,6 +3176,7 @@ sub install_db ($$) {
   mtr_add_arg($args, "--loose-disable-debug");
   mtr_add_arg($args, "--tmpdir=.");
   mtr_add_arg($args, "--core-file");
+  mtr_add_arg($args, "--plugin-load=tokudb=ha_tokudb.so");
 
   #
   # Setup args for bootstrap.test
