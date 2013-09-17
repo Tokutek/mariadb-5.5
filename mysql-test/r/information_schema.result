@@ -81,8 +81,6 @@ TRIGGERS
 TokuDB_file_map
 TokuDB_fractal_tree_block_map
 TokuDB_fractal_tree_info
-TokuDB_user_data
-TokuDB_user_data_exact
 USER_PRIVILEGES
 USER_STATISTICS
 VIEWS
@@ -127,9 +125,7 @@ TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
 TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
-TokuDB_user_data_exact	TokuDB_user_data_exact
 TokuDB_file_map	TokuDB_file_map
-TokuDB_user_data	TokuDB_user_data
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -153,9 +149,7 @@ TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
 TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
-TokuDB_user_data_exact	TokuDB_user_data_exact
 TokuDB_file_map	TokuDB_file_map
-TokuDB_user_data	TokuDB_user_data
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -179,9 +173,7 @@ TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
 TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
-TokuDB_user_data_exact	TokuDB_user_data_exact
 TokuDB_file_map	TokuDB_file_map
-TokuDB_user_data	TokuDB_user_data
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -674,9 +666,7 @@ TABLE_STATISTICS
 TRIGGERS
 TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map
-TokuDB_user_data_exact
 TokuDB_file_map
-TokuDB_user_data
 create database information_schema;
 ERROR 42000: Access denied for user 'root'@'localhost' to database 'information_schema'
 use information_schema;
@@ -690,9 +680,7 @@ TABLE_STATISTICS	SYSTEM VIEW
 TRIGGERS	SYSTEM VIEW
 TokuDB_fractal_tree_info	SYSTEM VIEW
 TokuDB_fractal_tree_block_map	SYSTEM VIEW
-TokuDB_user_data_exact	SYSTEM VIEW
 TokuDB_file_map	SYSTEM VIEW
-TokuDB_user_data	SYSTEM VIEW
 create table t1(a int);
 ERROR 42000: Access denied for user 'root'@'localhost' to database 'information_schema'
 use test;
@@ -709,9 +697,7 @@ TABLE_STATISTICS
 TRIGGERS
 TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map
-TokuDB_user_data_exact
 TokuDB_file_map
-TokuDB_user_data
 select table_name from tables where table_name='user';
 table_name
 user
@@ -911,8 +897,6 @@ TABLES	TABLE_NAME	select
 TABLE_CONSTRAINTS	TABLE_NAME	select
 TABLE_PRIVILEGES	TABLE_NAME	select
 TABLE_STATISTICS	TABLE_NAME	select
-TokuDB_user_data	table_name	select
-TokuDB_user_data_exact	table_name	select
 VIEWS	TABLE_NAME	select
 delete from mysql.user where user='mysqltest_4';
 delete from mysql.db where user='mysqltest_4';
