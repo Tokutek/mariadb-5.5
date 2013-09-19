@@ -775,7 +775,11 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
+<<<<<<< HEAD
 TABLE_NAME	TokuDB_user_data
+=======
+TABLE_NAME	TokuDB_locks
+>>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
@@ -798,7 +802,34 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
+<<<<<<< HEAD
 TABLE_NAME	TokuDB_user_data_exact
+=======
+TABLE_NAME	TokuDB_lock_waits
+TABLE_TYPE	SYSTEM VIEW
+ENGINE	MEMORY
+VERSION	10
+ROW_FORMAT	Fixed
+TABLE_ROWS	#TBLR#
+AVG_ROW_LENGTH	#ARL#
+DATA_LENGTH	#DL#
+MAX_DATA_LENGTH	#MDL#
+INDEX_LENGTH	#IL#
+DATA_FREE	#DF#
+AUTO_INCREMENT	NULL
+CREATE_TIME	#CRT#
+UPDATE_TIME	#UT#
+CHECK_TIME	#CT#
+TABLE_COLLATION	utf8_general_ci
+CHECKSUM	NULL
+CREATE_OPTIONS	#CO#
+TABLE_COMMENT	#TC#
+user_comment	
+Separator	-----------------------------------------------------
+TABLE_CATALOG	def
+TABLE_SCHEMA	information_schema
+TABLE_NAME	TokuDB_trx
+>>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
@@ -1690,7 +1721,11 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
+<<<<<<< HEAD
 TABLE_NAME	TokuDB_user_data
+=======
+TABLE_NAME	TokuDB_locks
+>>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
@@ -1713,7 +1748,34 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
+<<<<<<< HEAD
 TABLE_NAME	TokuDB_user_data_exact
+=======
+TABLE_NAME	TokuDB_lock_waits
+TABLE_TYPE	SYSTEM VIEW
+ENGINE	MEMORY
+VERSION	10
+ROW_FORMAT	Fixed
+TABLE_ROWS	#TBLR#
+AVG_ROW_LENGTH	#ARL#
+DATA_LENGTH	#DL#
+MAX_DATA_LENGTH	#MDL#
+INDEX_LENGTH	#IL#
+DATA_FREE	#DF#
+AUTO_INCREMENT	NULL
+CREATE_TIME	#CRT#
+UPDATE_TIME	#UT#
+CHECK_TIME	#CT#
+TABLE_COLLATION	utf8_general_ci
+CHECKSUM	NULL
+CREATE_OPTIONS	#CO#
+TABLE_COMMENT	#TC#
+user_comment	
+Separator	-----------------------------------------------------
+TABLE_CATALOG	def
+TABLE_SCHEMA	information_schema
+TABLE_NAME	TokuDB_trx
+>>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10

@@ -56,10 +56,11 @@ USER_STATISTICS	USER
 VIEWS	TABLE_SCHEMA
 TokuDB_fractal_tree_info	dictionary_name
 TokuDB_fractal_tree_block_map	dictionary_name
-TokuDB_user_data_exact	database_name
+TokuDB_lock_waits	requesting_trx_id
 TokuDB_file_map	dictionary_name
 XTRADB_ADMIN_COMMAND	result_message
-TokuDB_user_data	database_name
+TokuDB_locks	locks_trx_id
+TokuDB_trx	trx_id
 SELECT t.table_name, c1.column_name
 FROM information_schema.tables t
 INNER JOIN
@@ -113,7 +114,8 @@ USER_STATISTICS	USER
 VIEWS	TABLE_SCHEMA
 TokuDB_fractal_tree_info	dictionary_name
 TokuDB_fractal_tree_block_map	dictionary_name
-TokuDB_user_data_exact	database_name
+TokuDB_lock_waits	requesting_trx_id
 TokuDB_file_map	dictionary_name
 XTRADB_ADMIN_COMMAND	result_message
-TokuDB_user_data	database_name
+TokuDB_locks	locks_trx_id
+TokuDB_trx	trx_id

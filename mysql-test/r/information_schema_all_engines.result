@@ -58,8 +58,9 @@ TRIGGERS
 TokuDB_file_map
 TokuDB_fractal_tree_block_map
 TokuDB_fractal_tree_info
-TokuDB_user_data
-TokuDB_user_data_exact
+TokuDB_lock_waits
+TokuDB_locks
+TokuDB_trx
 USER_PRIVILEGES
 USER_STATISTICS
 VIEWS
@@ -136,8 +137,9 @@ TRIGGERS	TRIGGER_SCHEMA
 TokuDB_file_map	dictionary_name
 TokuDB_fractal_tree_block_map	dictionary_name
 TokuDB_fractal_tree_info	dictionary_name
-TokuDB_user_data	database_name
-TokuDB_user_data_exact	database_name
+TokuDB_lock_waits	requesting_trx_id
+TokuDB_locks	locks_trx_id
+TokuDB_trx	trx_id
 USER_PRIVILEGES	GRANTEE
 USER_STATISTICS	USER
 VIEWS	TABLE_SCHEMA
@@ -214,8 +216,9 @@ TRIGGERS	TRIGGER_SCHEMA
 TokuDB_file_map	dictionary_name
 TokuDB_fractal_tree_block_map	dictionary_name
 TokuDB_fractal_tree_info	dictionary_name
-TokuDB_user_data	database_name
-TokuDB_user_data_exact	database_name
+TokuDB_lock_waits	requesting_trx_id
+TokuDB_locks	locks_trx_id
+TokuDB_trx	trx_id
 USER_PRIVILEGES	GRANTEE
 USER_STATISTICS	USER
 VIEWS	TABLE_SCHEMA
@@ -297,8 +300,9 @@ TABLE_STATISTICS	information_schema.TABLE_STATISTICS	1
 TokuDB_file_map	information_schema.TokuDB_file_map	1
 TokuDB_fractal_tree_block_map	information_schema.TokuDB_fractal_tree_block_map	1
 TokuDB_fractal_tree_info	information_schema.TokuDB_fractal_tree_info	1
-TokuDB_user_data	information_schema.TokuDB_user_data	1
-TokuDB_user_data_exact	information_schema.TokuDB_user_data_exact	1
+TokuDB_locks	information_schema.TokuDB_locks	1
+TokuDB_lock_waits	information_schema.TokuDB_lock_waits	1
+TokuDB_trx	information_schema.TokuDB_trx	1
 TRIGGERS	information_schema.TRIGGERS	1
 USER_PRIVILEGES	information_schema.USER_PRIVILEGES	1
 USER_STATISTICS	information_schema.USER_STATISTICS	1
@@ -365,8 +369,9 @@ Database: information_schema
 | TokuDB_file_map                       |
 | TokuDB_fractal_tree_block_map         |
 | TokuDB_fractal_tree_info              |
-| TokuDB_user_data                      |
-| TokuDB_user_data_exact                |
+| TokuDB_lock_waits                     |
+| TokuDB_locks                          |
+| TokuDB_trx                            |
 | USER_PRIVILEGES                       |
 | USER_STATISTICS                       |
 | VIEWS                                 |
@@ -433,8 +438,9 @@ Database: INFORMATION_SCHEMA
 | TokuDB_file_map                       |
 | TokuDB_fractal_tree_block_map         |
 | TokuDB_fractal_tree_info              |
-| TokuDB_user_data                      |
-| TokuDB_user_data_exact                |
+| TokuDB_lock_waits                     |
+| TokuDB_locks                          |
+| TokuDB_trx                            |
 | USER_PRIVILEGES                       |
 | USER_STATISTICS                       |
 | VIEWS                                 |
@@ -447,5 +453,5 @@ Wildcard: inf_rmation_schema
 | information_schema |
 SELECT table_schema, count(*) FROM information_schema.TABLES WHERE table_schema IN ('mysql', 'INFORMATION_SCHEMA', 'test', 'mysqltest') AND table_name<>'ndb_binlog_index' AND table_name<>'ndb_apply_status' GROUP BY TABLE_SCHEMA;
 table_schema	count(*)
-information_schema	63
+information_schema	64
 mysql	23
