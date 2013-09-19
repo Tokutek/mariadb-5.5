@@ -12,7 +12,10 @@ TABLE_STATISTICS
 TRIGGERS
 TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map
+TokuDB_lock_waits
 TokuDB_file_map
+TokuDB_locks
+TokuDB_trx
 create database `inf%`;
 create database mbase;
 use `inf%`;
