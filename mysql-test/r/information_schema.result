@@ -81,6 +81,9 @@ TRIGGERS
 TokuDB_file_map
 TokuDB_fractal_tree_block_map
 TokuDB_fractal_tree_info
+TokuDB_lock_waits
+TokuDB_locks
+TokuDB_trx
 USER_PRIVILEGES
 USER_STATISTICS
 VIEWS
@@ -125,7 +128,10 @@ TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
 TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
+TokuDB_lock_waits	TokuDB_lock_waits
 TokuDB_file_map	TokuDB_file_map
+TokuDB_locks	TokuDB_locks
+TokuDB_trx	TokuDB_trx
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -149,7 +155,10 @@ TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
 TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
+TokuDB_lock_waits	TokuDB_lock_waits
 TokuDB_file_map	TokuDB_file_map
+TokuDB_locks	TokuDB_locks
+TokuDB_trx	TokuDB_trx
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -173,7 +182,10 @@ TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
 TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
+TokuDB_lock_waits	TokuDB_lock_waits
 TokuDB_file_map	TokuDB_file_map
+TokuDB_locks	TokuDB_locks
+TokuDB_trx	TokuDB_trx
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -666,7 +678,10 @@ TABLE_STATISTICS
 TRIGGERS
 TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map
+TokuDB_lock_waits
 TokuDB_file_map
+TokuDB_locks
+TokuDB_trx
 create database information_schema;
 ERROR 42000: Access denied for user 'root'@'localhost' to database 'information_schema'
 use information_schema;
@@ -680,7 +695,10 @@ TABLE_STATISTICS	SYSTEM VIEW
 TRIGGERS	SYSTEM VIEW
 TokuDB_fractal_tree_info	SYSTEM VIEW
 TokuDB_fractal_tree_block_map	SYSTEM VIEW
+TokuDB_lock_waits	SYSTEM VIEW
 TokuDB_file_map	SYSTEM VIEW
+TokuDB_locks	SYSTEM VIEW
+TokuDB_trx	SYSTEM VIEW
 create table t1(a int);
 ERROR 42000: Access denied for user 'root'@'localhost' to database 'information_schema'
 use test;
@@ -697,7 +715,10 @@ TABLE_STATISTICS
 TRIGGERS
 TokuDB_fractal_tree_info
 TokuDB_fractal_tree_block_map
+TokuDB_lock_waits
 TokuDB_file_map
+TokuDB_locks
+TokuDB_trx
 select table_name from tables where table_name='user';
 table_name
 user
