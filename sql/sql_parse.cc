@@ -918,6 +918,9 @@ bool dispatch_command(enum enum_server_command command, THD *thd,
   thd->enable_slow_log= TRUE;
   thd->query_plan_flags= QPLAN_INIT;
   thd->lex->sql_command= SQLCOM_END; /* to avoid confusing VIEW detectors */
+
+  DEBUG_SYNC(thd,"dispatch_command_before_set_time");
+
   thd->set_time();
   thd->set_query_id(get_query_id());
   if (!(server_command_flags[command] & CF_SKIP_QUERY_ID))
@@ -1462,6 +1465,7 @@ bool dispatch_command(enum enum_server_command command, THD *thd,
   thd_proc_info(thd, "cleaning up");
   thd->reset_query();
   thd->command=COM_SLEEP;
+  thd->set_time();
   dec_thread_running();
   thd_proc_info(thd, 0);
   thd->packet.shrink(thd->variables.net_buffer_length);	// Reclaim some memory
