@@ -18,24 +18,28 @@ insert into foo (a,b,c) select * from a,b,c;
 
 flush status;
 show status like '%Handler_read_next%';
+replace_column 9 NA;
 explain select * from foo where a between 5 and 6 and c=10;
 select * from foo where a between 5 and 6 and c=10;
 show status like '%Handler_read_next%';
 
 flush status;
 show status like '%Handler_read_prev%';
+replace_column 9 NA;
 explain select * from foo where a between 5 and 6 and c=10;
 select * from foo where a between 5 and 6 and c=10 order by a desc;
 show status like '%Handler_read_prev%';
 
 flush status;
 show status like '%Handler_read_prev%';
+replace_column 9 NA;
 explain select * from foo where a > 19 and c=10;
 select * from foo where a > 19 and c=10 order by a desc;
 show status like '%Handler_read_prev%';
 
 flush status;
 show status like '%Handler_read_next%';
+replace_column 9 NA;
 explain select * from foo where a > 19 and c=10;
 select * from foo where a > 19 and c=10;
 show status like '%Handler_read_next%';
