@@ -51,7 +51,8 @@ create view v1 (c) as
  SELECT table_name FROM information_schema.TABLES
   WHERE table_schema IN ('mysql', 'INFORMATION_SCHEMA', 'test', 'mysqltest') AND
         table_name not like 'ndb_%' AND table_name not like 'innodb_%' AND
-        table_name not like 'xtradb_%';
+        table_name not like 'pbxt_%' AND table_name not like 'xtradb_%' AND
+        table_name not like 'tokudb_%';
 --sorted_result
 select * from v1;
 
@@ -368,18 +369,21 @@ drop view vo;
 select TABLE_NAME,TABLE_TYPE,ENGINE
 from information_schema.tables
 where table_schema='information_schema' limit 2;
-show tables from information_schema like "T%";
+#show tables from information_schema like "T%";
+select table_name from information_schema.tables where binary table_name like 'T%' order by table_name;
 
 --error ER_DBACCESS_DENIED_ERROR
 create database information_schema;
 use information_schema;
-show full tables like "T%";
+#show full tables like "T%";
+select table_name from information_schema.tables where binary table_name like 'T%' order by table_name;
 --error ER_DBACCESS_DENIED_ERROR
 create table t1(a int);
 use test;
 show tables;
 use information_schema;
-show tables like "T%";
+#show tables like "T%";
+select table_name from information_schema.tables where binary table_name like 'T%' order by table_name;
 
 #
 # Bug#7210 information_schema: can't access when table-name = reserved word
