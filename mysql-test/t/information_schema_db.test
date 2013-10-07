@@ -14,8 +14,9 @@ drop function if exists f1;
 drop function if exists f2;
 --enable_warnings
 
---replace_result 'Tables_in_INFORMATION_SCHEMA (T%)' 'Tables_in_information_schema (T%)'
-show tables from INFORMATION_SCHEMA like 'T%';
+#--replace_result 'Tables_in_INFORMATION_SCHEMA (T%)' 'Tables_in_information_schema (T%)'
+#show tables from INFORMATION_SCHEMA like 'T%';
+select table_name as 'Tables_in_information_schema (T%)' from information_schema.tables where binary table_name like 'T%' order by table_name;
 create database `inf%`;
 create database mbase;
 use `inf%`;
