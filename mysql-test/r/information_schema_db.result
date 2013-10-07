@@ -2,20 +2,20 @@ drop table if exists t1,t2;
 drop view if exists v1,v2;
 drop function if exists f1;
 drop function if exists f2;
-show tables from INFORMATION_SCHEMA like 'T%';
+select table_name as 'Tables_in_information_schema (T%)' from information_schema.tables where binary table_name like 'T%' order by table_name;
 Tables_in_information_schema (T%)
 TABLES
 TABLESPACES
 TABLE_CONSTRAINTS
 TABLE_PRIVILEGES
 TABLE_STATISTICS
-TRIGGERS
-TokuDB_fractal_tree_info
-TokuDB_fractal_tree_block_map
-TokuDB_lock_waits
 TokuDB_file_map
+TokuDB_fractal_tree_block_map
+TokuDB_fractal_tree_info
 TokuDB_locks
+TokuDB_lock_waits
 TokuDB_trx
+TRIGGERS
 create database `inf%`;
 create database mbase;
 use `inf%`;
