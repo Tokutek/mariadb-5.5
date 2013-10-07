@@ -43,7 +43,8 @@ create view v1 (c) as
 SELECT table_name FROM information_schema.TABLES
 WHERE table_schema IN ('mysql', 'INFORMATION_SCHEMA', 'test', 'mysqltest') AND
 table_name not like 'ndb_%' AND table_name not like 'innodb_%' AND
-table_name not like 'pbxt_%' AND table_name not like 'xtradb_%';
+table_name not like 'pbxt_%' AND table_name not like 'xtradb_%' AND
+table_name not like 'tokudb_%';
 select * from v1;
 c
 CHARACTER_SETS
@@ -78,12 +79,6 @@ TABLE_CONSTRAINTS
 TABLE_PRIVILEGES
 TABLE_STATISTICS
 TRIGGERS
-TokuDB_file_map
-TokuDB_fractal_tree_block_map
-TokuDB_fractal_tree_info
-TokuDB_lock_waits
-TokuDB_locks
-TokuDB_trx
 USER_PRIVILEGES
 USER_STATISTICS
 VIEWS
@@ -126,12 +121,6 @@ TABLE_CONSTRAINTS	TABLE_CONSTRAINTS
 TABLE_PRIVILEGES	TABLE_PRIVILEGES
 TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
-TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
-TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
-TokuDB_lock_waits	TokuDB_lock_waits
-TokuDB_file_map	TokuDB_file_map
-TokuDB_locks	TokuDB_locks
-TokuDB_trx	TokuDB_trx
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -153,12 +142,6 @@ TABLE_CONSTRAINTS	TABLE_CONSTRAINTS
 TABLE_PRIVILEGES	TABLE_PRIVILEGES
 TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
-TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
-TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
-TokuDB_lock_waits	TokuDB_lock_waits
-TokuDB_file_map	TokuDB_file_map
-TokuDB_locks	TokuDB_locks
-TokuDB_trx	TokuDB_trx
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -180,12 +163,6 @@ TABLE_CONSTRAINTS	TABLE_CONSTRAINTS
 TABLE_PRIVILEGES	TABLE_PRIVILEGES
 TABLE_STATISTICS	TABLE_STATISTICS
 TRIGGERS	TRIGGERS
-TokuDB_fractal_tree_info	TokuDB_fractal_tree_info
-TokuDB_fractal_tree_block_map	TokuDB_fractal_tree_block_map
-TokuDB_lock_waits	TokuDB_lock_waits
-TokuDB_file_map	TokuDB_file_map
-TokuDB_locks	TokuDB_locks
-TokuDB_trx	TokuDB_trx
 tables_priv	tables_priv
 time_zone	time_zone
 time_zone_leap_second	time_zone_leap_second
@@ -668,57 +645,57 @@ where table_schema='information_schema' limit 2;
 TABLE_NAME	TABLE_TYPE	ENGINE
 CHARACTER_SETS	SYSTEM VIEW	MEMORY
 CLIENT_STATISTICS	SYSTEM VIEW	MEMORY
-show tables from information_schema like "T%";
-Tables_in_information_schema (T%)
+select table_name from information_schema.tables where binary table_name like 'T%' order by table_name;
+table_name
 TABLES
 TABLESPACES
 TABLE_CONSTRAINTS
 TABLE_PRIVILEGES
 TABLE_STATISTICS
-TRIGGERS
-TokuDB_fractal_tree_info
-TokuDB_fractal_tree_block_map
-TokuDB_lock_waits
 TokuDB_file_map
+TokuDB_fractal_tree_block_map
+TokuDB_fractal_tree_info
 TokuDB_locks
+TokuDB_lock_waits
 TokuDB_trx
+TRIGGERS
 create database information_schema;
 ERROR 42000: Access denied for user 'root'@'localhost' to database 'information_schema'
 use information_schema;
-show full tables like "T%";
-Tables_in_information_schema (T%)	Table_type
-TABLES	SYSTEM VIEW
-TABLESPACES	SYSTEM VIEW
-TABLE_CONSTRAINTS	SYSTEM VIEW
-TABLE_PRIVILEGES	SYSTEM VIEW
-TABLE_STATISTICS	SYSTEM VIEW
-TRIGGERS	SYSTEM VIEW
-TokuDB_fractal_tree_info	SYSTEM VIEW
-TokuDB_fractal_tree_block_map	SYSTEM VIEW
-TokuDB_lock_waits	SYSTEM VIEW
-TokuDB_file_map	SYSTEM VIEW
-TokuDB_locks	SYSTEM VIEW
-TokuDB_trx	SYSTEM VIEW
+select table_name from information_schema.tables where binary table_name like 'T%' order by table_name;
+table_name
+TABLES
+TABLESPACES
+TABLE_CONSTRAINTS
+TABLE_PRIVILEGES
+TABLE_STATISTICS
+TokuDB_file_map
+TokuDB_fractal_tree_block_map
+TokuDB_fractal_tree_info
+TokuDB_locks
+TokuDB_lock_waits
+TokuDB_trx
+TRIGGERS
 create table t1(a int);
 ERROR 42000: Access denied for user 'root'@'localhost' to database 'information_schema'
 use test;
 show tables;
 Tables_in_test
 use information_schema;
-show tables like "T%";
-Tables_in_information_schema (T%)
+select table_name from information_schema.tables where binary table_name like 'T%' order by table_name;
+table_name
 TABLES
 TABLESPACES
 TABLE_CONSTRAINTS
 TABLE_PRIVILEGES
 TABLE_STATISTICS
-TRIGGERS
-TokuDB_fractal_tree_info
-TokuDB_fractal_tree_block_map
-TokuDB_lock_waits
 TokuDB_file_map
+TokuDB_fractal_tree_block_map
+TokuDB_fractal_tree_info
 TokuDB_locks
+TokuDB_lock_waits
 TokuDB_trx
+TRIGGERS
 select table_name from tables where table_name='user';
 table_name
 user
