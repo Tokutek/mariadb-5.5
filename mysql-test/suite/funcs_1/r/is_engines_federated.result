@@ -1,0 +1,8 @@
+SELECT * FROM information_schema.engines
+WHERE ENGINE = 'FEDERATED';
+ENGINE	FEDERATED
+SUPPORT	YES
+COMMENT	FederatedX pluggable storage engine
+TRANSACTIONS	YES
+XA	NO
+SAVEPOINTS	YES

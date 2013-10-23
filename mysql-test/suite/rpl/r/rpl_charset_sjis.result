@@ -1,0 +1,55 @@
+include/master-slave.inc
+[connection master]
+drop table if exists t1;
+drop procedure if exists p1;
+create table t1 (a varchar(255) character set sjis);
+create procedure p1 (in a varchar(255) character set sjis) insert into t1 values (a);
+SET NAMES binary;
+CALL p1 ('–\\');
+select "--- on master ---";
+--- on master ---
+--- on master ---
+select hex(a) from t1 ;
+hex(a)
+965C
+select "--- on slave ---";
+--- on slave ---
+--- on slave ---
+select hex(a) from t1;
+hex(a)
+965C
+drop table t1;
+drop procedure p1;
+#
+# Start of 5.5 tests
+#
+#
+# Bug#MDEV-4489 Replication of big5, cp932, gbk, sjis strings makes wrong values on slave
+#
+--- on master ---
+SET NAMES sjis;
+CREATE TABLE t1 (a INT);
+INSERT INTO t1 VALUES (0x31),(X'31'),('1');
+PREPARE stmt FROM 'INSERT INTO t1 (a) VALUES (?)';
+SET @a='1';
+EXECUTE stmt USING @a;
+DROP PREPARE stmt;
+SELECT * FROM t1;
+a
+49
+1
+1
+1
+--- on slave ---
+SELECT * FROM t1;
+a
+49
+1
+1
+1
+--- on master ---
+DROP TABLE t1;
+#
+# End of 5.5 tests
+#
+include/rpl_end.inc
