@@ -134,7 +134,7 @@ TABLE_CONSTRAINTS	CONSTRAINT_SCHEMA
 TABLE_PRIVILEGES	TABLE_SCHEMA
 TABLE_STATISTICS	TABLE_SCHEMA
 TRIGGERS	TRIGGER_SCHEMA
-TokuDB_file_map	dictionary_name
+TokuDB_file_map	table_schema
 TokuDB_fractal_tree_block_map	dictionary_name
 TokuDB_fractal_tree_info	dictionary_name
 TokuDB_lock_waits	requesting_trx_id
@@ -213,7 +213,7 @@ TABLE_CONSTRAINTS	CONSTRAINT_SCHEMA
 TABLE_PRIVILEGES	TABLE_SCHEMA
 TABLE_STATISTICS	TABLE_SCHEMA
 TRIGGERS	TRIGGER_SCHEMA
-TokuDB_file_map	dictionary_name
+TokuDB_file_map	table_schema
 TokuDB_fractal_tree_block_map	dictionary_name
 TokuDB_fractal_tree_info	dictionary_name
 TokuDB_lock_waits	requesting_trx_id
