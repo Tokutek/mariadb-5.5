@@ -1,0 +1,49 @@
+# test MDEV-5399
+
+source include/have_tokudb.inc;
+source include/have_innodb.inc;
+
+disable_warnings;
+drop table if exists t1,t2t,t2i;
+enable_warnings;
+
+CREATE TABLE t1 (a1 char(2), a2 char(2)) ENGINE=InnoDB; 
+INSERT INTO t1 VALUES (NULL, 'xx'); 
+INSERT INTO t1 VALUES ('yy', 'xx'); 
+INSERT INTO t1 VALUES ('yy', NULL); 
+INSERT INTO t1 VALUES ('zz', 'zz'); 
+
+CREATE TABLE t2t (b char(2), INDEX(b)) ENGINE=TokuDB; 
+CREATE TABLE t2i (b char(2), INDEX(b)) ENGINE=InnoDB; 
+INSERT INTO t2t VALUES ('yy'),('zz'); 
+INSERT INTO t2i VALUES ('yy'),('zz'); 
+
+SET optimizer_switch = 'materialization=on'; 
+
+# explain extended SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2t); 
+SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2t); 
+
+# explain extended SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2i); 
+SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2i); 
+
+# explain extended select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2t) as sq from t1; 
+select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2t) as sq from t1; 
+
+# explain extended select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2i) as sq from t1; 
+select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2i) as sq from t1; 
+
+SET optimizer_switch = 'materialization=off'; 
+
+# explain extended SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2t); 
+SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2t); 
+
+# explain extended SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2i); 
+SELECT * FROM t1 WHERE (a1, a2) NOT IN ( SELECT b, b FROM t2i); 
+
+# explain extended select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2t) as sq from t1; 
+select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2t) as sq from t1; 
+
+# explain extended select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2i) as sq from t1; 
+select a1, a2, (a1, a2) IN ( SELECT b, b FROM t2i) as sq from t1; 
+
+drop table t1,t2t,t2i;
