@@ -6763,6 +6763,8 @@ copy_table:
 #ifdef WITH_PARTITION_STORAGE_ENGINE
   if (table_for_fast_alter_partition)
   {
+    create_info->table_options= ((create_info->table_options & ~HA_OPTION_PACK_RECORD) |
+                                 (table->s->db_create_options & HA_OPTION_PACK_RECORD));
     DBUG_RETURN(fast_alter_partition_table(thd, table, alter_info,
                                            create_info, table_list,
                                            db, table_name,
