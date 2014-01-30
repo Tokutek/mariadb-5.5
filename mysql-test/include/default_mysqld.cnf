@@ -1,0 +1,81 @@
+# Copyright (c) 2007, 2013, Oracle and/or its affiliates
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA
+
+# Default values that applies to all MySQL Servers
+[mysqld]
+open-files-limit=           1024
+local-infile
+character-set-server=      latin1
+
+# Increase default connect_timeout to avoid intermittent
+# disconnects when test servers are put under load see BUG#28359
+connect-timeout=            60
+
+secure-file-priv= @ENV.MYSQLTEST_VARDIR
+
+log-basename=mysqld
+debug-no-sync
+
+# Retry bind as this may fail on busy server
+port-open-timeout=10
+
+log-bin-trust-function-creators=1
+key_buffer_size=            1M
+sort_buffer_size=           256K
+max_heap_table_size=        1M
+loose-aria-pagecache-buffer-size=8M
+
+loose-feedback-user-info=  mysql-test
+
+loose-innodb_data_file_path=      ibdata1:10M:autoextend
+loose-innodb_buffer_pool_size=    8M
+loose-innodb_write_io_threads=    2
+loose-innodb_read_io_threads=     2
+loose-innodb_log_buffer_size=     1M
+loose-innodb_log_file_size=       5M
+loose-innodb_additional_mem_pool_size= 1M
+loose-innodb_log_files_in_group=  2
+
+slave-net-timeout=120
+
+# Run tests with the performance schema instrumentation
+loose-enable-performance-schema
+# Run tests with a small number of instrumented objects
+# to limit memory consumption with MTR
+loose-performance-schema-max-mutex-instances=10000
+loose-performance-schema-max-rwlock-instances=10000
+loose-performance-schema-max-table-instances=500
+loose-performance-schema-max-table-handles=1000
+
+binlog-direct-non-transactional-updates
+
+default-storage-engine=myisam
+
+# here, at the end of [mysqld] group mtr will automatically disable
+# all optional plugins.
+
+[embedded]
+# mtr automatically adds [embedded] group at the end and copies [mysqld]
+# and [mysqld.1] groups into it.
+# but we want [server] group to be after [mysqld] (and its copies).
+# create a non-empty [embedded] group here, to force it before [server]
+local-infile
+
+[server]
+# Aria is optional, but it must be enabled if it's used for temporary
+# tables.  Let's enable it in the [server] group, because this group
+# is read after [mysqld] and [embedded]
+loose-aria
+
