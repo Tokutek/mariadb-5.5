@@ -19,5 +19,4 @@ mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 chang
 file_contents            : MDEV-6526 these files are not installed anymore
 default_storage_engine   : tcallaghan   2012-07-10 test is not compatible with our default storage engine changes
 mysql_plugin             : tcallaghan   2012-07-11 need to revisit test
-handlersocket            : prohaska     2012-09-13 needs libstdc++.so.6.0.17 that gets built with gcc-4.7
 innodb_ext_key           : prohaska                query plan for innodb is perturbed by our clustering key changes
