@@ -19,3 +19,4 @@ mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 chang
 default_storage_engine   : tcallaghan   2012-07-10 test is not compatible with our default storage engine changes
 mysql_plugin             : tcallaghan   2012-07-11 need to revisit test
 innodb_ext_key           : prohaska                query plan for innodb is perturbed by our clustering key changes
+bad_frm_crash_5029       : prohaska                old ARIA and current TOKUDB have the same plugin number, so this test can not work
