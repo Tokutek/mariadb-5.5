@@ -209,6 +209,8 @@ extern int bootstrap_error;
 extern I_List<THD> threads;
 extern char err_shared_dir[];
 
+extern ulong backup_throttle;
+
 /*
   THR_MALLOC is a key which will be used to set/get MEM_ROOT** for a thread,
   using my_pthread_setspecific_ptr()/my_thread_getspecific_ptr().
