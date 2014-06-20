@@ -84,6 +84,7 @@ SET (SQL_SOURCE
                gcalc_slicescan.cc gcalc_tools.cc
 			   threadpool_common.cc 
 			   ../sql-common/mysql_async.c
+               sql_backup.cc
                ${CMAKE_CURRENT_BINARY_DIR}/sql_builtin.cc
                ${GEN_SOURCES}
                ${MYSYS_LIBWRAP_SOURCE}
@@ -155,7 +156,7 @@ IF(NOT WITHOUT_DYNAMIC_PLUGINS)
 ENDIF(NOT WITHOUT_DYNAMIC_PLUGINS)
 
 SET_TARGET_PROPERTIES(mysqld PROPERTIES ENABLE_EXPORTS TRUE) 
-TARGET_LINK_LIBRARIES(mysqld sql)
+TARGET_LINK_LIBRARIES(mysqld ${HOT_BACKUP_LIBS} sql)
 
 # Provide plugins with minimal set of libraries
 SET(INTERFACE_LIBS ${LIBRT})

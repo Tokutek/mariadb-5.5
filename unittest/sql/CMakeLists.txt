@@ -25,5 +25,5 @@ ELSE()
   ADD_EXECUTABLE(explain_filename-t explain_filename-t.cc)
 ENDIF()
 
-TARGET_LINK_LIBRARIES(explain_filename-t sql mytap)
+TARGET_LINK_LIBRARIES(explain_filename-t ${HOT_BACKUP_LIBS} sql mytap)
 ADD_TEST(explain_filename explain_filename-t)
