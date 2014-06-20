@@ -107,8 +107,6 @@ FOREACH(_base
   ENDIF()
 ENDFOREACH()
 
-
-
 # Following autotools tradition, add preprocessor definitions
 # specified in environment variable CPPFLAGS
 IF(DEFINED ENV{CPPFLAGS})
@@ -382,6 +380,10 @@ ELSEIF(MYSQL_MAINTAINER_MODE MATCHES "AUTO")
   SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${MY_MAINTAINER_CXX_WARNINGS}")
 ENDIF()
 
+## TOKU: produces HotBackup library
+ADD_SUBDIRECTORY(toku_backup)
+INCLUDE_DIRECTORIES(toku_backup)
+
 IF(WITH_UNIT_TESTS)
  ENABLE_TESTING()
  ADD_SUBDIRECTORY(unittest/mytap)
@@ -399,6 +401,9 @@ IF(NOT WITHOUT_SERVER)
  # Add storage engines and plugins.
  CONFIGURE_PLUGINS()
 ENDIF()
+
+## TOKU: Setting rpath so that toku hot backup can be linked to from lib dir.
+SET(CMAKE_INSTALL_RPATH "\$ORIGIN/../${INSTALL_LIBDIR}/:\$\$ORIGIN/../${INSTALL_LIBDIR}/")
 
 ADD_SUBDIRECTORY(include)
 ADD_SUBDIRECTORY(dbug)
