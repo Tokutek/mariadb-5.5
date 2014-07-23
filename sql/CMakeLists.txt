@@ -156,6 +156,13 @@ IF(NOT WITHOUT_DYNAMIC_PLUGINS)
 ENDIF(NOT WITHOUT_DYNAMIC_PLUGINS)
 
 SET_TARGET_PROPERTIES(mysqld PROPERTIES ENABLE_EXPORTS TRUE) 
+IF(UNIX)
+  GET_TARGET_PROPERTY(mysqld_link_flags mysqld LINK_FLAGS)
+  IF(NOT mysqld_link_flags)
+    SET(mysqld_link_flags)
+  ENDIF()
+  SET_TARGET_PROPERTIES(mysqld PROPERTIES LINK_FLAGS "${mysqld_link_flags} -Wl,--no-as-needed")
+ENDIF()
 TARGET_LINK_LIBRARIES(mysqld ${HOT_BACKUP_LIBS} sql)
 
 # Provide plugins with minimal set of libraries
