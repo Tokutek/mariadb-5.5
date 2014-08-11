@@ -1217,6 +1217,8 @@ public:
   friend int cmp_key_rowid_part_id(void *ptr, uchar *ref1, uchar *ref2);
 public:
   int new_alter_table_frm_data(const uchar *frm_data, size_t frm_len);
+
+  int discover(THD *thd, const char *db, const char *name, uchar **frmblob, size_t *frmlen);
 };
 
 #endif /* HA_PARTITION_INCLUDED */
