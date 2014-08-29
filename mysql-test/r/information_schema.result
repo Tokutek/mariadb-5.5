@@ -896,6 +896,8 @@ TABLE_CONSTRAINTS	TABLE_NAME	select
 TABLE_PRIVILEGES	TABLE_NAME	select
 TABLE_STATISTICS	TABLE_NAME	select
 TokuDB_file_map	table_name	select
+TokuDB_fractal_tree_block_map	table_name	select
+TokuDB_fractal_tree_info	table_name	select
 VIEWS	TABLE_NAME	select
 delete from mysql.user where user='mysqltest_4';
 delete from mysql.db where user='mysqltest_4';
