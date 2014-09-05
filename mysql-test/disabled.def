@@ -20,3 +20,4 @@ default_storage_engine   : tcallaghan   2012-07-10 test is not compatible with o
 mysql_plugin             : tcallaghan   2012-07-11 need to revisit test
 innodb_ext_key           : prohaska                query plan for innodb is perturbed by our clustering key changes
 bad_frm_crash_5029       : prohaska                old ARIA and current TOKUDB have the same plugin number, so this test can not work
+innodb_load_xa           : prohaska                test fails since tokudb is automatically installed
