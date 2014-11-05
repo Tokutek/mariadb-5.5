@@ -650,7 +650,7 @@
 
   __GLIBC__ is defined in <features.h>
 */
-#ifdef __GLIBC__
+#if 0 && defined __GLIBC__
 #error <my_config.h> MUST be included first!
 #endif
 
