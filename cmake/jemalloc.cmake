@@ -41,6 +41,7 @@ IF(CMAKE_SYSTEM_NAME MATCHES "Linux" OR APPLE)
  # as they both have GNU make and jemalloc actually compiles.
  # Also, BSDs use jemalloc as malloc already
  SET(WITH_JEMALLOC_DEFAULT "yes")
+ SET(WITH_JEMALLOC_DEFAULT "bundled") # override default to bundled
 ELSE()
  SET(WITH_JEMALLOC_DEFAULT "no")
 ENDIF()
