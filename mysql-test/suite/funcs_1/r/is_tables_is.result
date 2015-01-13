@@ -775,11 +775,7 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
-<<<<<<< HEAD
-TABLE_NAME	TokuDB_user_data
-=======
 TABLE_NAME	TokuDB_locks
->>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
@@ -802,9 +798,6 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
-<<<<<<< HEAD
-TABLE_NAME	TokuDB_user_data_exact
-=======
 TABLE_NAME	TokuDB_lock_waits
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
@@ -829,7 +822,6 @@ Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
 TABLE_NAME	TokuDB_trx
->>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
@@ -1721,11 +1713,7 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
-<<<<<<< HEAD
-TABLE_NAME	TokuDB_user_data
-=======
 TABLE_NAME	TokuDB_locks
->>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
@@ -1748,9 +1736,6 @@ user_comment
 Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
-<<<<<<< HEAD
-TABLE_NAME	TokuDB_user_data_exact
-=======
 TABLE_NAME	TokuDB_lock_waits
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
@@ -1775,7 +1760,6 @@ Separator	-----------------------------------------------------
 TABLE_CATALOG	def
 TABLE_SCHEMA	information_schema
 TABLE_NAME	TokuDB_trx
->>>>>>> 8455cd4... #81 fix mysql test results to tokudb locks and tokudb file map info schemas
 TABLE_TYPE	SYSTEM VIEW
 ENGINE	MEMORY
 VERSION	10
