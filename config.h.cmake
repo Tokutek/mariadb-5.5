@@ -654,7 +654,7 @@
   my_config.h first. So, their crashes are their responsibility,
   we enable this check only for MariaDB sources (SAFE_MUTEX check).
 */
-#if defined(__GLIBC__) && defined(SAFE_MUTEX)
+#if defined(__GLIBC__) && defined(SAFE_MUTEX) && 0
 #error <my_config.h> MUST be included first!
 #endif
 
