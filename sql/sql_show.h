@@ -140,4 +140,6 @@ bool ignore_db_dirs_process_additions();
 bool push_ignored_db_dir(char *path);
 extern char *opt_ignore_db_dirs;
 
+extern "C" int get_thread_query_string(my_thread_id id, String &qs);
+
 #endif /* SQL_SHOW_H */
